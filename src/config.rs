@@ -144,7 +144,7 @@ impl Display for Config {
                 acc.push_str(&format!("{}\n", record));
                 acc
             });
-        write!(f, "Your records: \n{}", records)
+        write!(f, "\nYour records: \n{}", records)
     }
 }
 

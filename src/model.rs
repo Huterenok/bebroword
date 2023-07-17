@@ -3,6 +3,8 @@ use std::fmt::Display;
 use magic_crypt::{new_magic_crypt, MagicCryptTrait};
 use serde::{Deserialize, Serialize};
 
+use crate::cli::create_border;
+
 #[derive(Deserialize, Serialize, Clone)]
 pub struct UserRecord {
     pub signature: String,
@@ -19,8 +21,12 @@ impl Display for UserRecord {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
             f,
-            "{{\n\tSignature: {}\n\tDomen: {}\n\tEmail: {}\n\tPassword: {}\n}}",
-            self.signature, self.data.domen, self.data.email, self.data.password
+            "{}\nSignature: {}\nDomen: {}\nEmail: {}\nPassword: {}",
+            create_border(),
+            self.signature,
+            self.data.domen,
+            self.data.email,
+            self.data.password,
         )
     }
 }
