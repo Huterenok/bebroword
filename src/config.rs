@@ -14,9 +14,11 @@ pub struct Config{
     pub records: Vec<UserRecord>,
 }
 
+const PATH: &str = "./config/config.json";
+
 impl Config {
     pub fn initialize() -> (Self, String) {
-        let config = File::open("./config/config.json").unwrap();
+        let config = File::open(PATH).unwrap();
         let reader = BufReader::new(config);
         let mut config = Config::default();
         let mut secret_word = String::new();
@@ -64,7 +66,7 @@ impl Config {
                             config = Config::new(control_word);
                             secret_word = data;
 
-                            fs::write("./config/config.json", json!(config).to_string()).unwrap();
+                            fs::write(PATH, json!(config).to_string()).unwrap();
                             println!(
                                 "Config was successfully saved. Welcome, your secret word is {}",
                                 &secret_word
@@ -113,7 +115,7 @@ impl Config {
             self.write_all(secret_word);
             Ok(())
         } else {
-            Err("Can't find record with this signature. Try to enter another one".to_string())
+            Err("Can't find record with this signature".to_string())
         }
     }
 
@@ -123,12 +125,8 @@ impl Config {
             record.data.encode(secret_word);
         });
 
-        fs::write("./config/config.json", json!(json_config).to_string()).unwrap();
+        fs::write(PATH, json!(json_config).to_string()).unwrap();
     }
-
-    // pub fn show(&self) -> String {
-    //     self.to_string()
-    // }
 
     fn decode(&mut self, secret_word: &str) {
         self.records.iter_mut().for_each(|record| {
