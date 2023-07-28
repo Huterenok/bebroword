@@ -11,7 +11,6 @@ fn main() -> Result<(), io::Error> {
     let (config, secret_word) = Config::initialize();
 
     show_command_list();
-
     match_command(config, secret_word);
 
     Ok(())

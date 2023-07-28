@@ -1,6 +1,6 @@
 use std::fmt::Display;
-use std::fs;
-use std::fs::File;
+use std::fs::{self, File};
+use std::fs::OpenOptions;
 use std::io::{stdin, BufReader};
 
 use crate::model::UserRecord;
@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::json;
 
 #[derive(Deserialize, Serialize, Clone)]
-pub struct Config{
+pub struct Config {
     pub control_word: String,
     pub records: Vec<UserRecord>,
 }
@@ -18,7 +18,12 @@ const PATH: &str = "./config/config.json";
 
 impl Config {
     pub fn initialize() -> (Self, String) {
-        let config = File::open(PATH).unwrap();
+        let config = OpenOptions::new()
+            .read(true)
+            .write(true)
+            .create(true)
+            .open(PATH)
+            .unwrap();
         let reader = BufReader::new(config);
         let mut config = Config::default();
         let mut secret_word = String::new();
@@ -148,7 +153,7 @@ impl Display for Config {
     }
 }
 
-impl Default for Config{
+impl Default for Config {
     fn default() -> Self {
         Config {
             control_word: "".to_string(),
