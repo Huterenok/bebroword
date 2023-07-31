@@ -95,7 +95,7 @@ impl Config {
         }
     }
 
-    pub fn get_record(&self, signature: String, secret_word: &str) -> Result<UserRecord, String> {
+    pub fn get_record(&self, signature: String) -> Result<UserRecord, String> {
         if let Some(record) = self
             .records
             .iter()

@@ -52,7 +52,7 @@ pub fn match_command(mut config: Config, secret_word: String) {
                 command = String::new();
 
                 match stdin().read_line(&mut command) {
-                    Ok(_) => match config.get_record(command.trim().to_string(), &secret_word) {
+                    Ok(_) => match config.get_record(command.trim().to_string()) {
                         Ok(record) => println!("{}", record),
                         Err(err) => println!("{}", err),
                     },
