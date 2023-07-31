@@ -1,0 +1,29 @@
+{
+  "control_word": "4X5gL1pk9rH48VPJcuGLqw==",
+  "records": [
+    {
+      "data": {
+        "domen": "bebra123",
+        "email": "email",
+        "password": "D5i06V2H2oSUERBZSyuxHg=="
+      },
+      "signature": "bebra"
+    },
+    {
+      "data": {
+        "domen": "1",
+        "email": "1",
+        "password": "O+aWQsLemHxk1Jo8e/0Osg=="
+      },
+      "signature": "bebra1"
+    },
+    {
+      "data": {
+        "domen": "1",
+        "email": "1",
+        "password": "O+aWQsLemHxk1Jo8e/0Osg=="
+      },
+      "signature": "bebra2"
+    }
+  ]
+}

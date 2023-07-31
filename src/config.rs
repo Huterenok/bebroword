@@ -1,6 +1,6 @@
 use std::fmt::Display;
-use std::fs::{self, File};
 use std::fs::OpenOptions;
+use std::fs::{self, File};
 use std::io::{stdin, BufReader};
 
 use crate::model::UserRecord;
@@ -93,6 +93,18 @@ impl Config {
             control_word,
             records: Vec::new(),
         }
+    }
+
+    pub fn get_record(&self, signature: String, secret_word: &str) -> Result<UserRecord, String> {
+        if let Some(record) = self
+            .records
+            .iter()
+            .find(|record| record.signature == signature)
+        {
+            return Ok(record.clone());
+        } else {
+						return Err("Couldn't find record with this signature".to_string());
+        };
     }
 
     pub fn add_record(&mut self, record: UserRecord, secret_word: &str) -> Result<(), String> {

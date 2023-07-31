@@ -39,9 +39,21 @@ pub fn match_command(mut config: Config, secret_word: String) {
                 println!("Write signature of your record");
                 command = String::new();
 
-                let _res = match stdin().read_line(&mut command) {
+                match stdin().read_line(&mut command) {
                     Ok(_) => match config.remove_record(command.trim().to_string(), &secret_word) {
                         Ok(_) => println!("Record with {} signature was deleted", command.trim()),
+                        Err(err) => println!("{}", err),
+                    },
+                    Err(_) => println!("Wrong arguments were provided"),
+                };
+            }
+            "get" => {
+                println!("Write signature of your record");
+                command = String::new();
+
+                match stdin().read_line(&mut command) {
+                    Ok(_) => match config.get_record(command.trim().to_string(), &secret_word) {
+                        Ok(record) => println!("{}", record),
                         Err(err) => println!("{}", err),
                     },
                     Err(_) => println!("Wrong arguments were provided"),
@@ -62,7 +74,7 @@ pub fn match_command(mut config: Config, secret_word: String) {
 
 pub fn show_command_list() {
     println!(
-        "{}Available commands: ADD  |  REMOVE  |  GET_ALL  |  FINISH\n{}",
+        "{}Available commands: ADD  |  REMOVE  |  GET  |  GET_ALL  |  FINISH  \n{}",
         create_border(),
         create_border()
     );

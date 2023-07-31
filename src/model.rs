@@ -21,12 +21,13 @@ impl Display for UserRecord {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
             f,
-            "{}\nSignature: {}\nDomen: {}\nEmail: {}\nPassword: {}",
+            "{}\nSignature: {}\nDomen: {}\nEmail: {}\nPassword: {}\n{}",
             create_border(),
             self.signature,
             self.data.domen,
             self.data.email,
             self.data.password,
+						create_border()
         )
     }
 }
